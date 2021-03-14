@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:fastic_demo/di.dart';
 import 'package:fastic_demo/feature/home_screen.dart';
+import 'package:fastic_demo/theme/fastic_colors.dart';
 import 'package:flutter/material.dart';
 
 // As a User I want to synchronization my steps with my prefered health source
@@ -23,20 +24,17 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  final Color orange = Color.fromRGBO(247, 165, 108, 1);
-  final Color fadeGray = Color.fromRGBO(237, 241, 243, 1);
-  final Color gray = Color.fromRGBO(166, 172, 180, 1);
-  final Color softBlue = Color.fromRGBO(89, 98, 116, 1);
-  final Color darkBlue = Color.fromRGBO(31, 52, 85, 1);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
         brightness: Brightness.light,
-        primaryColor: orange,
+        primaryColor: FasticColors.orange,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        accentColor: gray,
+        // buttonTheme: ButtonThemeData(splashColor: FasticColors.orange),
+        // accentColor: FasticColors.orange,
+        // splashColor: FasticColors.orange,
+        appBarTheme: AppBarTheme(color: Colors.transparent, elevation: 0)
       ),
       home: HomeScreen(),
     );
