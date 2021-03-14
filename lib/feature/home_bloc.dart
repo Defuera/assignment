@@ -16,17 +16,27 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
     if (event is Init) {
       final goal = _prefs.getStepsGoal() ?? 30000; //todo
+      final isReminderEnabled = _prefs.isReminderEnabled();
       final stepsWalked = await _healthKit.steps;
       final burnedCalories = await _healthKit.burnedCalories;
 
       final goalPercentage = _calculatePercentage(stepsWalked, goal);
-      yield HomeState.ready(goalPercentage, goal, stepsWalked, burnedCalories);
+      yield HomeState.ready(
+        goalPercentage: goalPercentage,
+        stepsGoal: goal,
+        stepsWalked: stepsWalked,
+        burnedCalories: burnedCalories,
+        isReminderEnabled: isReminderEnabled,
+      );
     } else if (event is OnDailyGoalSet) {
       _prefs.setStepsGoal(event.stepsCount);
       yield state.copyWith(
-          stepsGoal: event.stepsCount,
-          goalPercentage: _calculatePercentage(state.stepsWalked, event.stepsCount)
+        stepsGoal: event.stepsCount,
+        goalPercentage: _calculatePercentage(state.stepsWalked, event.stepsCount),
       );
+    } else if (event is OnSwitchReminderPressed) {
+      _prefs.setReminderEnabled(!state.isReminderEnabled);
+      yield state.copyWith(isReminderEnabled: !state.isReminderEnabled);
     }
   }
 

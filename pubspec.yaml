@@ -15,9 +15,6 @@ dependencies:
   shared_preferences: ^0.5.12 #//  ^2.0.4
   cupertino_icons: ^1.0.0
 
-  # Plugins
-  health: ^3.0.3
-
   # architecture
   get_it: ^5.0.1
   bloc: ^6.0.3
@@ -26,6 +23,9 @@ dependencies:
   # UI
   percent_indicator: ^2.1.9+1
 
+  # Plugins
+  health: ^3.0.3
+  flutter_local_notifications: ^4.0.1+2
 
 dev_dependencies:
   flutter_test:
