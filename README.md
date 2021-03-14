@@ -22,11 +22,8 @@
 
 ### Demo:
 
+![fastic_demo](https://user-images.githubusercontent.com/1181883/111086307-aee84180-851b-11eb-8a52-93e43803fc92.gif)
 
-https://user-images.githubusercontent.com/1181883/111086111-cecb3580-851a-11eb-9491-ce23a6be3f62.mp4
+or [video](https://user-images.githubusercontent.com/1181883/111086234-59139980-851b-11eb-9f7c-a9feeac8dc3d.mp4)
 
-
-
-
-https://user-images.githubusercontent.com/1181883/111086234-59139980-851b-11eb-9f7c-a9feeac8dc3d.mp4
 
