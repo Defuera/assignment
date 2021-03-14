@@ -1,23 +1,17 @@
 abstract class HomeEvent {}
 
-abstract class _Event extends HomeEvent {}
-
 class Init extends HomeEvent {}
 
-class SelectMovie extends _Event {}
+class OnDailyGoalSet extends HomeEvent {
+  final int stepsCount;
 
-class CreateMovie extends HomeEvent {
-  final String name;
-
-  CreateMovie(this.name);
+  OnDailyGoalSet(this.stepsCount);
 }
-
-class EditMovie extends _Event {}
 
 class HomeState {
   final bool isLoading;
 
-  final double goalPercentage;
+  final int goalPercentage;
   final int stepsGoal;
   final int stepsWalked;
   final int burnedCalories;
@@ -27,7 +21,7 @@ class HomeState {
   factory HomeState.loading() => HomeState._(isLoading: true);
 
   factory HomeState.ready(
-    double goalPercentage,
+    int goalPercentage,
     int stepsGoal,
     int stepsWalked,
     int burnedCalories,
@@ -39,11 +33,18 @@ class HomeState {
         stepsWalked: stepsWalked,
         burnedCalories: burnedCalories,
       );
-//
-// HomeState copyWith({List<String> movies, int selectedMovieId}) => HomeState._(
-//       isLoading: isLoading ?? this.isLoading,
-//       movies: movies ?? this.movies,
-//       isCreatorMode: isCreatorMode ?? this.isCreatorMode,
-//       selectedMovieId: selectedMovieId ?? this.selectedMovieId,
-//     );
+
+  HomeState copyWith({
+    int goalPercentage,
+    int stepsGoal,
+    int stepsWalked,
+    int burnedCalories,
+  }) =>
+      HomeState._(
+        isLoading: isLoading ?? this.isLoading,
+        goalPercentage: goalPercentage ?? this.goalPercentage,
+        stepsGoal: stepsGoal ?? this.stepsGoal,
+        stepsWalked: stepsWalked ?? this.stepsWalked,
+        burnedCalories: burnedCalories ?? this.burnedCalories,
+      );
 }

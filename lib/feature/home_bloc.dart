@@ -19,8 +19,16 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       final stepsWalked = await _healthKit.steps;
       final burnedCalories = await _healthKit.burnedCalories;
 
-      final goalPercentage = stepsWalked / goal;
+      final goalPercentage = _calculatePercentage(stepsWalked, goal);
       yield HomeState.ready(goalPercentage, goal, stepsWalked, burnedCalories);
+    } else if (event is OnDailyGoalSet) {
+      _prefs.setStepsGoal(event.stepsCount);
+      yield state.copyWith(
+          stepsGoal: event.stepsCount,
+          goalPercentage: _calculatePercentage(state.stepsWalked, event.stepsCount)
+      );
     }
   }
+
+  int _calculatePercentage(int stepsWalked, int goal) => (stepsWalked / goal * 100).toInt();
 }

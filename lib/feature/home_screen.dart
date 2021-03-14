@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:fastic_demo/feature/home_bloc.dart';
 import 'package:fastic_demo/feature/home_model.dart';
 import 'package:fastic_demo/theme/fastic_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
@@ -15,8 +18,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final _bloc = HomeBloc();
 
-  // final AppPrefs _prefs = GetIt.instance.get();
-
   @override
   void dispose() {
     super.dispose();
@@ -25,18 +26,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        // backgroundColor: Colors.transparent,
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           leading: Icon(Icons.arrow_back_ios_rounded),
-          // titleText: 'Home',
           actions: [
             IconButton(
               icon: Icon(Icons.notifications_off_outlined),
-              // onPressed: () => showNameDialog(
-              //   context: context,
-              //   titleText: 'New Movie',
-              //   onNameInput: (name) => _bloc.add(CreateMovie(name)),
-              // ),
             )
           ],
         ),
@@ -52,7 +47,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           alignment: Alignment.centerLeft,
                           child: Text(
                             'Stepcounter',
-                            style: Theme.of(context).textTheme.headline5.copyWith(fontWeight: FontWeight.w600, letterSpacing: 0.2, color: FasticColors.darkBlue),
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline5
+                                .copyWith(fontWeight: FontWeight.w600, letterSpacing: 0.2, color: FasticColors.darkBlue),
                           ),
                         ),
                         Padding(
@@ -74,15 +72,54 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ],
                         ),
-                        _DailyGoalButton(onPressed: () {}),
+                        Padding(padding: const EdgeInsets.only(top: 16.0)),
+                        _DailyGoalButton(onPressed: () => _showDailyGoalDialog(context)),
                       ],
                     ),
                   )),
       );
+
+  void _showDailyGoalDialog(BuildContext context) {
+    final controller = TextEditingController();
+    showDialog(
+        context: context,
+        child: AlertDialog(
+          title: Text('Daily goal'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text('How many steps you want to walk every day?'),
+              TextField(
+                autofocus: true,
+                controller: controller,
+                keyboardType: TextInputType.number,
+                maxLength: 6,
+                maxLengthEnforced: true,
+                decoration: InputDecoration(
+                  counterText: '',
+                ),
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp("[0-9]")),
+                ],
+              )
+            ],
+          ),
+          actions: [
+            TextButton(onPressed: () => Navigator.of(context).pop(), child: Text('Cancel')),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                _bloc.add(OnDailyGoalSet(int.parse(controller.text)));
+              },
+              child: Text('OK'),
+            )
+          ],
+        ));
+  }
 }
 
 class _StepsProgressIndicator extends StatelessWidget {
-  final double percent;
+  final int percent;
 
   _StepsProgressIndicator(this.percent);
 
@@ -91,9 +128,18 @@ class _StepsProgressIndicator extends StatelessWidget {
     return Stack(
       alignment: Alignment.center,
       children: [
-        Text(
-          '${(percent * 100).toInt()}%', //todo calculate in bloc
-          style: TextStyle(fontSize: 68, color: FasticColors.darkBlue),
+        Positioned.fill(
+          // flex: 1,
+          child: FittedBox(
+            fit: BoxFit.fitWidth,
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Text(
+                '$percent%',
+                style: TextStyle(color: FasticColors.darkBlue, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
         ),
         CircularPercentIndicator(
           animationDuration: 200,
@@ -102,7 +148,7 @@ class _StepsProgressIndicator extends StatelessWidget {
           animation: true,
           circularStrokeCap: CircularStrokeCap.round,
           radius: MediaQuery.of(context).size.width / 2,
-          percent: percent,
+          percent: min(percent / 100, 1),
         ),
       ],
     );
