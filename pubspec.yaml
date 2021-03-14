@@ -1,0 +1,34 @@
+name: fastic_demo
+description: Fastic - Flutter Task
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Common
+  shared_preferences: ^0.5.12 #//  ^2.0.4
+  cupertino_icons: ^1.0.0
+
+  # Plugins
+  health: ^3.0.3
+
+  # architecture
+  get_it: ^5.0.1
+  bloc: ^6.0.3
+  flutter_bloc: ^6.0.5
+
+  # UI
+  percent_indicator: ^2.1.9+1
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+flutter:
+  uses-material-design: true
