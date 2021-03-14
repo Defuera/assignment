@@ -1,16 +1,22 @@
-# fastic_demo
+## Assignment explanations:
 
-Fastic - Flutter Task
+### Features implemented:
+    1. Display steps, calories and daily progress
+    2. Set daily goal, stored in shared prefs
+    3. Display notification when enabled
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+### Notes:
+1. On enable notification I’m setting an alarm to display notification in 5 seconds instead of 8pm, for testing purposes
+2. Not much documentation can be found, I think naming is expressive enough 🤞
+3. Notice Resizable text in progress indicator :)
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+### Imperfections:
+1. Back arrow not doing anything, since there’s only one screen
+2. Implemented fake data source for steps and calories, too much hassle to register with Android :/
+3. Bottom progress bar not implemented, didn’t get the logic of it
+4. On first load when no daily goal is set you have to manually press DailyGoal button, I was lazy to implement a bus to invoke it from the Bloc and didn’t want to implement poor solution invoking it from widget itself 🤷‍♀️
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+
