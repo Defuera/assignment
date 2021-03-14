@@ -1,16 +1,16 @@
-abstract class HomeEvent {}
+abstract class StepcounterEvent {}
 
-class Init extends HomeEvent {}
+class Init extends StepcounterEvent {}
 
-class OnDailyGoalSet extends HomeEvent {
+class OnDailyGoalSet extends StepcounterEvent {
   final int stepsCount;
 
   OnDailyGoalSet(this.stepsCount);
 }
 
-class OnSwitchReminderPressed extends HomeEvent {}
+class OnSwitchReminderPressed extends StepcounterEvent {}
 
-class HomeState {
+class StepcounterState {
   final bool isLoading;
 
   final int goalPercentage;
@@ -19,18 +19,18 @@ class HomeState {
   final int burnedCalories;
   final bool isReminderEnabled;
 
-  HomeState._({this.isLoading, this.goalPercentage, this.stepsGoal, this.stepsWalked, this.burnedCalories, this.isReminderEnabled});
+  StepcounterState._({this.isLoading, this.goalPercentage, this.stepsGoal, this.stepsWalked, this.burnedCalories, this.isReminderEnabled});
 
-  factory HomeState.loading() => HomeState._(isLoading: true);
+  factory StepcounterState.loading() => StepcounterState._(isLoading: true);
 
-  factory HomeState.ready({
+  factory StepcounterState.ready({
     int goalPercentage,
     int stepsGoal,
     int stepsWalked,
     int burnedCalories,
     bool isReminderEnabled,
   }) =>
-      HomeState._(
+      StepcounterState._(
         isLoading: false,
         goalPercentage: goalPercentage,
         stepsGoal: stepsGoal,
@@ -39,14 +39,14 @@ class HomeState {
         isReminderEnabled: isReminderEnabled,
       );
 
-  HomeState copyWith({
+  StepcounterState copyWith({
     int goalPercentage,
     int stepsGoal,
     int stepsWalked,
     int burnedCalories,
     bool isReminderEnabled,
   }) =>
-      HomeState._(
+      StepcounterState._(
         isLoading: isLoading ?? this.isLoading,
         goalPercentage: goalPercentage ?? this.goalPercentage,
         stepsGoal: stepsGoal ?? this.stepsGoal,

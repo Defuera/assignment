@@ -1,5 +1,5 @@
-import 'package:fastic_demo/feature/stepcounter/home_bloc.dart';
-import 'package:fastic_demo/feature/stepcounter/home_model.dart';
+import 'package:fastic_demo/feature/stepcounter/stepcounter_bloc.dart';
+import 'package:fastic_demo/feature/stepcounter/stepcounter_model.dart';
 import 'package:fastic_demo/feature/stepcounter/widgets/daily_goal.dart';
 import 'package:fastic_demo/feature/stepcounter/widgets/info.dart';
 import 'package:fastic_demo/feature/stepcounter/widgets/notificationa_switch.dart';
@@ -9,15 +9,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key key}) : super(key: key);
+class StepcounterScreen extends StatefulWidget {
+  const StepcounterScreen({Key key}) : super(key: key);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _StepcounterScreenState createState() => _StepcounterScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  final _bloc = HomeBloc();
+class _StepcounterScreenState extends State<StepcounterScreen> {
+  final _bloc = StepcounterBloc();
 
   @override
   void dispose() {
@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) => BlocBuilder(
         cubit: _bloc,
-        builder: (context, HomeState state) => Scaffold(
+        builder: (context, StepcounterState state) => Scaffold(
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
             leading: InkWell(
