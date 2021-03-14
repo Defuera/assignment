@@ -1,6 +1,6 @@
+import 'package:fastic_demo/model/alarm_manager.dart';
 import 'package:fastic_demo/model/app_prefs.dart';
 import 'package:fastic_demo/model/health_data_source.dart';
-import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
 class DiModule {
@@ -13,6 +13,7 @@ class DiModule {
     getIt
       ..registerLazySingleton(() => appPrefs)
       ..registerLazySingleton(() => HealthKit())
+      ..registerLazySingleton(() => AlarmManager())
     ;
   }
 }

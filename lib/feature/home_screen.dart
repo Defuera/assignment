@@ -32,63 +32,60 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      BlocBuilder(
+  Widget build(BuildContext context) => BlocBuilder(
         cubit: _bloc,
-        builder: (context, HomeState state) =>
-            Scaffold(
-              resizeToAvoidBottomInset: false,
-              appBar: AppBar(
-                leading: Icon(Icons.arrow_back_ios_rounded),
-                actions: [
-                  NotificationSwitch(
-                    isEnabled: state.isReminderEnabled,
-                    onPressed: () => _bloc.add(OnSwitchReminderPressed()),
-                  )
-                ],
-              ),
-              body: state.isLoading
-                  ? Center(child: CircularProgressIndicator())
-                  : Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Stepcounter',
-                        style: Theme
-                            .of(context)
-                            .textTheme
-                            .headline5
-                            .copyWith(fontWeight: FontWeight.w600, letterSpacing: 0.2, color: FasticColors.darkBlue),
+        builder: (context, HomeState state) => Scaffold(
+          resizeToAvoidBottomInset: false,
+          appBar: AppBar(
+            leading: Icon(Icons.arrow_back_ios_rounded),
+            actions: [
+              if (!state.isLoading) NotificationSwitch(
+                isEnabled: state.isReminderEnabled,
+                onPressed: () => _bloc.add(OnSwitchReminderPressed()),
+              )
+            ],
+          ),
+          body: state.isLoading
+              ? Center(child: CircularProgressIndicator())
+              : Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Stepcounter',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline5
+                              .copyWith(fontWeight: FontWeight.w600, letterSpacing: 0.2, color: FasticColors.darkBlue),
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 54.0),
-                      child: _StepsProgressIndicator(state.goalPercentage),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        _CounterWidget(
-                          icon: Icons.directions_walk, //todo icon
-                          title: '${state.stepsWalked} / ${state.stepsGoal}',
-                          description: 'Steps',
-                        ),
-                        _CounterWidget(
-                          icon: Icons.local_fire_department_rounded,
-                          title: '${state.burnedCalories}',
-                          description: 'Calories',
-                        ),
-                      ],
-                    ),
-                    Padding(padding: const EdgeInsets.only(top: 16.0)),
-                    _DailyGoalButton(onPressed: () => _showDailyGoalDialog(context)),
-                  ],
+                      Padding(
+                        padding: const EdgeInsets.only(top: 54.0),
+                        child: _StepsProgressIndicator(state.goalPercentage),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          _CounterWidget(
+                            icon: Icons.directions_walk, //todo icon
+                            title: '${state.stepsWalked} / ${state.stepsGoal}',
+                            description: 'Steps',
+                          ),
+                          _CounterWidget(
+                            icon: Icons.local_fire_department_rounded,
+                            title: '${state.burnedCalories}',
+                            description: 'Calories',
+                          ),
+                        ],
+                      ),
+                      Padding(padding: const EdgeInsets.only(top: 16.0)),
+                      _DailyGoalButton(onPressed: () => _showDailyGoalDialog(context)),
+                    ],
+                  ),
                 ),
-              ),
-            ),
+        ),
       );
 
   void _showDailyGoalDialog(BuildContext context) {
@@ -159,10 +156,7 @@ class _StepsProgressIndicator extends StatelessWidget {
           backgroundColor: FasticColors.fadeGray,
           animation: true,
           circularStrokeCap: CircularStrokeCap.round,
-          radius: MediaQuery
-              .of(context)
-              .size
-              .width / 2,
+          radius: MediaQuery.of(context).size.width / 2,
           percent: min(percent / 100, 1),
         ),
       ],
@@ -187,23 +181,13 @@ class _CounterWidget extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(4.0),
-            child: Icon(icon, color: Theme
-                .of(context)
-                .primaryColor),
+            child: Icon(icon, color: Theme.of(context).primaryColor),
           ),
           Padding(
             padding: const EdgeInsets.all(2.0),
-            child: Text(title, style: Theme
-                .of(context)
-                .textTheme
-                .bodyText1
-                .copyWith(color: FasticColors.softBlue)),
+            child: Text(title, style: Theme.of(context).textTheme.bodyText1.copyWith(color: FasticColors.softBlue)),
           ),
-          Text(description, style: Theme
-              .of(context)
-              .textTheme
-              .bodyText2
-              .copyWith(color: FasticColors.softBlue)),
+          Text(description, style: Theme.of(context).textTheme.bodyText2.copyWith(color: FasticColors.softBlue)),
         ],
       ),
     );
@@ -250,18 +234,17 @@ class NotificationSwitch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Builder(
-      builder: (context) =>
-          IconButton(
-            icon: Icon(icon, color: FasticColors.darkBlue),
-            onPressed: () {
-              onPressed();
-              Scaffold.of(context).showSnackBar(SnackBar(
-                content: Text('Reminder is ${isEnabled ? 'off' : 'on'}'),
-                behavior: SnackBarBehavior.fixed,
-                duration: Duration(seconds: 1),
-              ));
-            },
-          ),
+      builder: (context) => IconButton(
+        icon: Icon(icon, color: FasticColors.darkBlue),
+        onPressed: () {
+          onPressed();
+          Scaffold.of(context).showSnackBar(SnackBar(
+            content: Text('Reminder is ${isEnabled ? 'off' : 'on'}'),
+            behavior: SnackBarBehavior.fixed,
+            duration: Duration(seconds: 1),
+          ));
+        },
+      ),
     );
   }
 }
