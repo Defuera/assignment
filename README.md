@@ -1,9 +1,9 @@
 ## Assignment explanations:
 
 ### Features implemented:
-    1. Display steps, calories and daily progress
-    2. Set daily goal, stored in shared prefs
-    3. Display notification when enabled
+1. Display steps, calories and daily progress
+2. Set daily goal, stored in shared prefs
+3. Display notification when enabled
 
 
 ### Notes:
@@ -22,5 +22,11 @@
 
 ### Demo:
 
-Uploading fastic_demo.mp4…
+
+https://user-images.githubusercontent.com/1181883/111086111-cecb3580-851a-11eb-9491-ce23a6be3f62.mp4
+
+
+
+
+https://user-images.githubusercontent.com/1181883/111086234-59139980-851b-11eb-9f7c-a9feeac8dc3d.mp4
 
