@@ -50,8 +50,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         Align(
                           alignment: Alignment.centerLeft,
-                          child: Text('Stepcounter',
-                              style: Theme.of(context).textTheme.headline5.copyWith(fontWeight: FontWeight.w600, letterSpacing: 0.2)),
+                          child: Text(
+                            'Stepcounter',
+                            style: Theme.of(context).textTheme.headline5.copyWith(fontWeight: FontWeight.w600, letterSpacing: 0.2, color: FasticColors.darkBlue),
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 54.0),
@@ -91,12 +93,12 @@ class _StepsProgressIndicator extends StatelessWidget {
       children: [
         Text(
           '${(percent * 100).toInt()}%', //todo calculate in bloc
-          style: TextStyle(fontSize: 68),
+          style: TextStyle(fontSize: 68, color: FasticColors.darkBlue),
         ),
         CircularPercentIndicator(
           animationDuration: 200,
           lineWidth: 10,
-          backgroundColor: FasticColors.gray,
+          backgroundColor: FasticColors.fadeGray,
           animation: true,
           circularStrokeCap: CircularStrokeCap.round,
           radius: MediaQuery.of(context).size.width / 2,
@@ -128,9 +130,9 @@ class _CounterWidget extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(2.0),
-            child: Text(title, style: Theme.of(context).textTheme.bodyText1),
+            child: Text(title, style: Theme.of(context).textTheme.bodyText1.copyWith(color: FasticColors.softBlue)),
           ),
-          Text(description, style: Theme.of(context).textTheme.bodyText2),
+          Text(description, style: Theme.of(context).textTheme.bodyText2.copyWith(color: FasticColors.softBlue)),
         ],
       ),
     );
