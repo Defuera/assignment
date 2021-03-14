@@ -69,8 +69,8 @@ class _StepcounterScreenState extends State<StepcounterScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           CounterWidget(
-                            icon: Icons.directions_walk, //todo icon
-                            title: '${state.stepsWalked} / ${state.stepsGoal}',
+                            icon: Icons.directions_walk,
+                            title: '${state.stepsWalked} / ${state.stepsGoal ?? '...'}',
                             description: 'Steps',
                           ),
                           CounterWidget(

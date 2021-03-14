@@ -22,7 +22,7 @@ class DailyGoalButton extends StatelessWidget {
           children: [
             Icon(Icons.edit_outlined, size: 16, color: FasticColors.gray),
             Padding(padding: EdgeInsets.only(left: 8)),
-            Text('DailyGoal', style: TextStyle(fontSize: 12, color: FasticColors.gray)),
+            Text('Daily Goal', style: TextStyle(fontSize: 12, color: FasticColors.gray)),
           ],
         ),
       ),

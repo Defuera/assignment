@@ -21,7 +21,7 @@ class StepsProgressIndicator extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(12.0),
               child: Text(
-                '$percent%',
+                percent == null ? '...' : '$percent%',
                 style: TextStyle(color: FasticColors.darkBlue, fontWeight: FontWeight.bold),
               ),
             ),
@@ -34,7 +34,7 @@ class StepsProgressIndicator extends StatelessWidget {
           animation: true,
           circularStrokeCap: CircularStrokeCap.round,
           radius: MediaQuery.of(context).size.width / 2,
-          percent: min(percent / 100, 1),
+          percent: percent == null ? 0 : min(percent / 100, 1),
         ),
       ],
     );

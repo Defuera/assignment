@@ -26,10 +26,10 @@ class StepcounterBloc extends Bloc<StepcounterEvent, StepcounterState> {
     }
   }
 
-  int _calculatePercentage(int stepsWalked, int goal) => (stepsWalked / goal * 100).toInt();
+  int _calculatePercentage(int stepsWalked, int goal) => goal == null ? null : (stepsWalked / goal * 100).toInt();
 
   Stream<StepcounterState> _processInit(Init event) async* {
-    final goal = _prefs.getStepsGoal() ?? 30000; //todo
+    final goal = _prefs.getStepsGoal();
     final isReminderEnabled = _prefs.isReminderEnabled();
     final stepsWalked = await _healthKit.steps;
     final burnedCalories = await _healthKit.burnedCalories;
