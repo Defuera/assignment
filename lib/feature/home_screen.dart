@@ -8,6 +8,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
+// As a User I want to synchronization my steps with my preferred health source
+// As a User I want to get a reminder at 8pm if I haven’t achieved my goal
+
+//Done:
+// As a User I want to set my daily goal
+// As a User I want to see how much steps I achieved today
+// As a User I want to see how much calories I have burned with my steps
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key}) : super(key: key);
 
@@ -31,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
           leading: Icon(Icons.arrow_back_ios_rounded),
           actions: [
             IconButton(
-              icon: Icon(Icons.notifications_off_outlined),
+              icon: Icon(Icons.notifications_off_outlined, color: FasticColors.darkBlue),
             )
           ],
         ),
